@@ -2,9 +2,9 @@
 
 namespace App\Controllers\Api;
 
-// Kita menggunakan ResourceController
+
 use CodeIgniter\RESTful\ResourceController;
-// TAMBAHKAN BARIS INI untuk mengenali kelas IncomingRequest
+
 use CodeIgniter\HTTP\IncomingRequest;
 
 /**
@@ -42,7 +42,7 @@ class Produk extends ResourceController
      */
     public function index()
     {
-        // Menggunakan Model untuk mengambil semua data
+
         return $this->respond($this->model->findAll());
     }
 
@@ -59,7 +59,7 @@ class Produk extends ResourceController
             return $this->respond($data);
         }
         
-        // Kirim respon 404 Not Found jika data tidak ada
+
         return $this->failNotFound('Data produk tidak ditemukan.');
     }
 
@@ -71,14 +71,14 @@ class Produk extends ResourceController
      */
     public function create()
     {
-        // Mengambil data JSON yang dikirim di body request
-        // 'true' berarti kita konversi jadi array, bukan object
-        // Error di editor Anda SEHARUSNYA SUDAH HILANG
+
+
+
         $data = $this->request->getJSON(true);
 
-        // Coba insert data menggunakan Model
+
         if ($this->model->insert($data)) {
-            // Buat respon sukses (HTTP 201 Created)
+
             $response = [
                 'status' => 201,
                 'message' => 'Produk berhasil ditambahkan.'
@@ -86,7 +86,7 @@ class Produk extends ResourceController
             return $this->respondCreated($response);
         } 
         
-        // Jika gagal (misal: validasi error), kirim error
+
         return $this->fail($this->model->errors());
     }
 
@@ -98,22 +98,22 @@ class Produk extends ResourceController
      */
     public function update($id = null)
     {
-        // Cek dulu apakah produknya ada
+
         if (!$this->model->find($id)) {
             return $this->failNotFound('Data produk tidak ditemukan.');
         }
 
-        // Error di editor Anda SEHARUSNYA SUDAH HILANG
+
         $data = $this->request->getJSON(true);
 
-        // Coba update data
+
         if ($this->model->update($id, $data)) {
-            // Buat respon sukses
+
             $response = [
                 'status' => 200,
                 'message' => 'Produk berhasil diperbarui.'
             ];
-            return $this->respond($response); // respond() defaultnya 200 OK
+            return $this->respond($response);
         } 
         
         return $this->fail($this->model->errors());
@@ -127,19 +127,19 @@ class Produk extends ResourceController
      */
     public function delete($id = null)
     {
-        // Cek dulu apakah produknya ada
+
         if (!$this->model->find($id)) {
             return $this->failNotFound('Data produk tidak ditemukan.');
         }
 
-        // Coba hapus data
+
         if ($this->model->delete($id)) {
-            // Buat respon sukses
+
             $response = [
                 'status' => 200,
                 'message' => 'Produk berhasil dihapus.'
             ];
-            return $this->respondDeleted($response); // respondDeleted() juga 200 OK
+            return $this->respondDeleted($response);
         } 
         
         return $this->fail('Gagal menghapus produk.');

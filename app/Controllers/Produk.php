@@ -15,9 +15,7 @@ class Produk extends BaseController
      */
     public function index()
     {
-        // Kita hanya perlu me-return sebuah view.
-        // Logika untuk mengambil data (fetch) akan kita
-        // lakukan di sisi frontend (JavaScript).
+
         return view('produk/index');
     }
 }

@@ -86,7 +86,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         
-        // --- Inisialisasi Elemen ---
+
         const tabelBody = document.querySelector("#tabel-produk tbody");
         const btnTambah = document.querySelector("#btn-tambah");
         const modalElement = document.querySelector("#modalProduk");
@@ -95,13 +95,13 @@
         const apiUrl = '<?= base_url('api/produk/') ?>';
 
         
-        // --- Fungsi Notifikasi (SweetAlert) ---
+
         const notif = (status, pesan) => {
             Swal.fire({
-                icon: status, // 'success' atau 'error'
+                icon: status,
                 title: pesan,
                 showConfirmButton: false,
-                timer: 1500 // Notif hilang setelah 1.5 detik
+                timer: 1500
             });
         }
         
@@ -177,7 +177,7 @@
             let method = 'POST';
             let pesanSukses = 'Data produk berhasil ditambahkan!';
             
-            if (id) { // Jika ada ID, ini adalah UPDATE
+            if (id) {
                 url = `${apiUrl}${id}`;
                 method = 'PUT';
                 pesanSukses = 'Data produk berhasil diperbarui!';
@@ -197,16 +197,16 @@
 
                 modalProduk.hide();
                 loadDataProduk();
-                // ===========================================
-                // GANTI ALERT DENGAN SWEETALERT
-                // ===========================================
+
+
+
                 notif('success', pesanSukses);
                 
             } catch (error) {
                 console.error("Error saat menyimpan data:", error);
-                // ===========================================
-                // GANTI ALERT DENGAN SWEETALERT
-                // ===========================================
+
+
+
                 notif('error', error.message);
             }
         });
@@ -231,9 +231,9 @@
 
             } catch (error) {
                 console.error("Error saat edit data:", error);
-                // ===========================================
-                // GANTI ALERT DENGAN SWEETALERT
-                // ===========================================
+
+
+
                 notif('error', error.message);
             }
         }
@@ -242,9 +242,9 @@
          * 5. DELETE (Fungsi): Menghapus data (DELETE)
          */
         window.hapusProduk = function(id) {
-            // ====================================================
-            // GANTI CONFIRM() DENGAN SWEETALERT
-            // ====================================================
+
+
+
             Swal.fire({
                 title: 'Apakah Anda yakin?',
                 text: "Data produk ini akan dihapus permanen!",
@@ -255,7 +255,7 @@
                 confirmButtonText: 'Ya, hapus!',
                 cancelButtonText: 'Batal'
             }).then(async (result) => {
-                // Jika user menekan tombol "Ya, hapus!"
+
                 if (result.isConfirmed) {
                     try {
                         const response = await fetch(`${apiUrl}${id}`, {
@@ -267,8 +267,8 @@
                             throw new Error(errorData.message || 'Gagal menghapus data');
                         }
                         
-                        loadDataProduk(); // Muat ulang tabel
-                        // Tampilkan notif sukses hapus
+                        loadDataProduk();
+
                         notif('success', 'Data produk berhasil dihapus.');
 
                     } catch (error) {
@@ -279,7 +279,7 @@
             })
         }
 
-        // --- Panggilan Awal ---
+
         loadDataProduk(); 
 
     });

@@ -4,11 +4,6 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-/**
- * ProdukModel adalah jembatan kita ke tabel 'produk'.
- * Kita tidak perlu menulis SQL manual (SELECT, INSERT, UPDATE, DELETE).
- * Model ini akan menangani semuanya secara otomatis.
- */
 class ProdukModel extends Model
 {
     /**
